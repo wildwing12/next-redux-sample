@@ -1,5 +1,6 @@
 import '../styles/globals.css';
-
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import 'ag-grid-community/dist/styles/ag-grid.css';
 import wrapper from "../src/store/configureStore";
 
 function MyApp({ Component, pageProps }) {

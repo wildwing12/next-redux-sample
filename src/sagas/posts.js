@@ -4,9 +4,10 @@ import {postsApi} from "../api";
 const GET_POSTS = 'pots/GET_POSTS';
 const GET_POSTS_SUCCESS = 'pots/GET_POSTS_SUCCESS';
 const GET_POSTS_ERROR = 'pots/GET_POSTS_ERROR';
-
+//화면에서 dispatch 하는 용도
 export const getPostsSaga = () => ({type: GET_POSTS});
 
+//사가 함수에 넣을 용도
 function* loadPostsSaga() {
     try {
         const posts = yield call(postsApi);
@@ -21,7 +22,7 @@ function* loadPostsSaga() {
         });
     }
 }
-
+//위에꺼 합쳐줄 용도
 export function * postsSaga(){
     yield takeEvery(GET_POSTS,loadPostsSaga);
 }

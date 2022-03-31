@@ -2,8 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getPostsSaga} from "../../src/sagas/posts";
 import {AgGridReact} from "ag-grid-react";
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import 'ag-grid-community/dist/styles/ag-grid.css';
+
 
 function About() {
         const {loading,data,error} = useSelector(state => {
@@ -16,8 +15,10 @@ function About() {
         useEffect(()=>{
             dispatch(getPostsSaga());
         },[dispatch]);
+
         if(loading)return <div>loading....</div>;
         if(error)return <div>에러발생</div>;
+        if(!data)return <div>데이터가 없습니다.</div>;
 
 
         return (
@@ -31,7 +32,6 @@ function About() {
                     cacheBlockSize={10}
                 >
                 </AgGridReact>
-
 
             </div>
         );
