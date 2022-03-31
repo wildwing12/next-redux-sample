@@ -21,20 +21,7 @@ function About() {
 
 
         return (
-            // <div>
-            //     {/*<ul>*/}
-            //     {/*{data.data.map((res,idx)=>*/}
-            //     {/*    <li key={idx}>*/}
-            //     {/*        <h1>{res.title}</h1>*/}
-            //     {/*        <h6>{res.body}</h6>*/}
-            //     {/*    </li>*/}
-            //     {/*)}*/}
-            //     {/*</ul>*/}
-            //     <AgGridReact
-            //         rowData={rowData}
-            //         columnDefs={col}
-            //     ></AgGridReact>
-            // </div>
+
             <div className="ag-theme-alpine" style={{height: 530, width: 600}}>
                 <AgGridReact
                     rowData={data}
