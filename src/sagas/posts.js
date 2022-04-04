@@ -37,27 +37,21 @@ const initialState = {
 export default function posts(state = initialState, action){
     switch (action.type){
         case GET_POSTS:
-            return{
-                ...state,
-                loading:true,
-                data:null,
-                error:null,
-            };
-        case GET_POSTS_SUCCESS:
-            return{
-                ...state,
-                loading: false,
-                data:action.posts,
-                error:null,
-            };
+            return common(state, true, null, null);
+      case GET_POSTS_SUCCESS:
+          return common(state, false, action.posts, null);
         case GET_POSTS_ERROR:
-            return{
-                ...state,
-                loading: false,
-                data:null,
-                error:action.error,
-            };
+            return  common(state, false, null, action.error);
         default:
             return state;
     }
+}
+
+const common  = (state,value1, value2, value3) =>{
+  return {
+    ...state,
+    loading:value1,
+    data:value2,
+    error:value3,
+  }
 }
