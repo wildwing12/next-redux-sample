@@ -29,7 +29,7 @@ export const getUserJoinSage = (info) => {
 
 // 회원 조회
 export const getUserViewSage = (id) => {
-  return ({type: USER_VIEW, id: id})
+  return ({type: USER_VIEW, id})
 }
 
 // state 초기값
@@ -68,13 +68,11 @@ function* loadUserJoinSaga(props) {
 
 // 회원 조회
 function* loadUserViewSage(data) {
-
   try {
-    const id = yield call(userViewPostsApi(data.id))
-    debugger;
+    const res = yield call(userViewPostsApi,data.id);
     yield put({
       type: USER_VIEW_SUCCESS,
-      data:id
+      res
     })
   } catch (error) {
     yield put({
@@ -106,14 +104,15 @@ export default function posts(state = initialState, action) {
     case USER_JOIN:
       return common(state, true, state.data, null)
     case USER_JOIN_SUCCESS:
-      return common(state, false, state.data.concat(action.data), action.error)
+      console.log(action.data);
+      return common(state, false, action.data, null);
 
       //회원 조회
     case USER_VIEW:
       return common(state, true, null, null)
     case USER_VIEW_SUCCESS:
       debugger;
-      return common(state, true, action.data, null)
+      return common(state, false, action.res, null)
 
     case GET_USER_POSTS_ERROR :
     case USER_JOIN_ERROR :
