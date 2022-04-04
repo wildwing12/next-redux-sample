@@ -8,7 +8,7 @@ function UserView() {
     if(!router.isReady) return false;
   return (
       <>
-        <Tests id={router.query.pid} />
+        <Tests id={router.query.pid}    />
       </>
   )
 }
