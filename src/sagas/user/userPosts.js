@@ -29,7 +29,7 @@ export const getUserJoinSage = (info) => {
 
 // 회원 조회
 export const getUserViewSage = (id) => {
-  return ({type: USER_VIEW, id: id})
+  return ({type: USER_VIEW, id})
 }
 
 // state 초기값
@@ -77,7 +77,6 @@ function* loadUserViewSage({id}) {
       data:paramId
     })
   } catch (error) {
-    console.dir(error)
     yield put({
       type: USER_VIEW_ERROR, error
     })
