@@ -68,6 +68,7 @@ function* loadUserJoinSaga(props) {
 
 // 회원 조회
 function* loadUserViewSage(data) {
+
   try {
     const id = yield call(userViewPostsApi(data.id))
     debugger;
