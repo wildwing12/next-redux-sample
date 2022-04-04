@@ -67,16 +67,17 @@ function* loadUserJoinSaga(props) {
 }
 
 // 회원 조회
-function* loadUserViewSage(data) {
-
+function* loadUserViewSage({id}) {
+  // debugger;
   try {
-    const id = yield call(userViewPostsApi(data.id))
-    debugger;
+    // debugger;
+    const paramId = yield call(userViewPostsApi, id);
     yield put({
       type: USER_VIEW_SUCCESS,
-      data:id
+      data:paramId
     })
   } catch (error) {
+    console.dir(error)
     yield put({
       type: USER_VIEW_ERROR, error
     })
@@ -112,8 +113,8 @@ export default function posts(state = initialState, action) {
     case USER_VIEW:
       return common(state, true, null, null)
     case USER_VIEW_SUCCESS:
-      debugger;
-      return common(state, true, action.data, null)
+      // debugger;
+      return common(state, false, action.data, null)
 
     case GET_USER_POSTS_ERROR :
     case USER_JOIN_ERROR :

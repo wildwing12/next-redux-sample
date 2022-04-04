@@ -13,6 +13,5 @@ export const userPostsApi = async () => {
 
 export const userViewPostsApi = async (id) => {
   const data = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
-  debugger;
   return data.data
 }
