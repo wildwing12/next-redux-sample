@@ -8,6 +8,7 @@ function Tests({id}) {
   const {loading, data, error} = useSelector(state => state.userPosts)
 
   useEffect(() => {
+    // debugger;
     dispatch(getUserViewSage(id))
   }, [dispatch])
 

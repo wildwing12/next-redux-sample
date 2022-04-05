@@ -26,6 +26,8 @@ function User() {
   if (error) return <div>에러발생</div>
   if (!data) return <div>데이터가 없습니다.</div>
 
+  console.log(data.id);
+
   return (
       <div className="ag-theme-alpine" style={{height: 530, width: 600}}>
         <AgGridReact

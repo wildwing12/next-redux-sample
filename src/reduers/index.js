@@ -2,7 +2,7 @@ import {HYDRATE} from 'next-redux-wrapper';
 import {combineReducers} from 'redux';
 import posts from "../sagas/posts";
 import userPosts from "../sagas/user/userPosts";
-import UserView from '../../pages/userView/[id]'
+import UserView from '../../pages/userView/[pid]'
 
 
 // (이전상태, 액션) => 다음상태
