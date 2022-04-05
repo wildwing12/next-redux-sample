@@ -3,14 +3,10 @@ import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {getUserJoinSage, getUserPostsSaga} from '../../src/sagas/user/userPosts'
 import {AgGridReact} from 'ag-grid-react'
+import AgGrid from '../../src/containers/AgGrid'
 
 function UserJoin() {
   let [info, setInfo] = useState({id: "", name: "", phone: "", email: ""});
-  const [col, setCol] = useState([{field: "id"}, {field: "name"}, {field: "email"}, {field: "phone"}]);
-
-  const {loading,data,error} = useSelector(state => {
-    return state.userPosts;
-  });
 
   const dispatch = useDispatch();
 
@@ -19,12 +15,6 @@ function UserJoin() {
     dispatch(getUserJoinSage(info));
   }
 
-  useEffect(()=>{
-    dispatch(getUserPostsSaga())
-  },[dispatch]);
-  // if (loading) return <div>loading...</div>
-  // if (error) return <div>에러발생</div>
-  // if (!data) return <div>데이터가 없습니다.</div>
   return (
       <>
         <input type="text" placeholder={"ID"} onChange={(e) => {
@@ -41,17 +31,7 @@ function UserJoin() {
         }}/>
         <button onClick={joinBtn}>회원가입</button>
 
-        { data &&
-            <div className="ag-theme-alpine" style={{height: 530, width: 600}}>
-          <AgGridReact
-              rowData={data}
-              columnDefs={col}
-              pagination={true}
-              paginationPageSize={10}
-              cacheBlockSize={10}
-          >
-          </AgGridReact>
-        </div>}
+        <AgGrid witch={'user'}/>
       </>
   )
 

@@ -18,6 +18,11 @@ const USER_VIEW = 'userPost/USER_VIEW';
 const USER_VIEW_SUCCESS = 'userPost/USER_VIEW_SUCCESS';
 const USER_VIEW_ERROR = 'userPost/USER_VIEW_ERROR';
 
+// 회원 삭제
+const USER_DELETE = 'userPost/USER_DELETE';
+const USER_DELETE_SUCCESS = 'userPost/USER_DELETE_SUCCESS';
+const USER_DELETE_ERROR = 'userPost/USER_DELETE_ERROR';
+
 
 // 회원 리스트 불러오는
 export const getUserPostsSaga = () => ({type: GET_USER_POSTS});
@@ -32,10 +37,11 @@ export const getUserViewSage = (id) => {
   return ({type: USER_VIEW, id})
 }
 
-// state 초기값
-const initialState = {
-  loading: false, data: null, error: null,
+// 회원 삭제
+export const getUserDeleteSaga = (id) => {
+  return ({type: USER_DELETE, id})
 }
+
 
 // 회원 리스트 불러오는
 function* loadUserPostsSaga() {
@@ -74,7 +80,7 @@ function* loadUserViewSage({id}) {
     const paramId = yield call(userViewPostsApi, id);
     yield put({
       type: USER_VIEW_SUCCESS,
-      data:paramId
+      data: paramId
     })
   } catch (error) {
     yield put({
@@ -83,6 +89,21 @@ function* loadUserViewSage({id}) {
   }
 }
 
+// 회원 삭제
+function* loadUserDeleteSaga({id}) {
+  try {
+    const userList = yield call(userPostsApi);
+    const newUserList = userList.filter((arr) => arr.id === id)
+    yield put({
+      type: USER_DELETE_SUCCESS,
+      data: newUserList
+    })
+  } catch (error) {
+    yield put({
+      type: USER_DELETE_ERROR, error
+    })
+  }
+}
 
 export function* userPostSaga() {
   // 회원 리스트 불러오는
@@ -91,8 +112,14 @@ export function* userPostSaga() {
   yield takeEvery(USER_JOIN, loadUserJoinSaga);
   // 회원 조회
   yield takeEvery(USER_VIEW, loadUserViewSage);
+  // 회원 삭제
+  yield takeEvery(USER_DELETE, loadUserDeleteSaga);
 }
 
+// state 초기값
+const initialState = {
+  loading: false, data: null, error: null,
+}
 
 export default function posts(state = initialState, action) {
   switch (action.type) {
@@ -112,12 +139,18 @@ export default function posts(state = initialState, action) {
     case USER_VIEW:
       return common(state, true, null, null)
     case USER_VIEW_SUCCESS:
-      // debugger;
       return common(state, false, action.data, null)
+
+      // 회원 삭제
+    case USER_DELETE:
+      return common(state, true, null, null)
+    case USER_DELETE_SUCCESS:
+      return common(state, false, null, null)
 
     case GET_USER_POSTS_ERROR :
     case USER_JOIN_ERROR :
     case USER_VIEW_ERROR :
+    case USER_DELETE_ERROR :
       return common(state, false, null, action.error)
 
     default:

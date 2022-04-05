@@ -1,28 +1,14 @@
-import React, {useEffect} from 'react';
-import {useRouter} from 'next/router'
-import {useDispatch, useSelector} from 'react-redux'
-import {getUserViewSage} from '../sagas/user/userPosts'
+import React from 'react';
+import AgGrid from '../containers/AgGrid'
+import UserView from '../containers/UserView'
+
 
 function Tests({id}) {
-  const dispatch = useDispatch();
-  const {loading, data, error} = useSelector(state => state.userPosts)
-
-  useEffect(() => {
-    // debugger;
-    dispatch(getUserViewSage(id))
-  }, [dispatch])
-
-  console.log('data===>',data);
-    if(loading) return <span>Loading...</span>;
-    if(!data) return null;
 
   return (
       <>
-        <div>
-          {/*{loading && <span>Loading...</span>}*/}
-          <h1>{data.username}</h1>
-          {/*{data?.map(res=><span key={res.id}>{res.name}</span>)}*/}
-        </div>
+        <UserView id={id}/>
+        <AgGrid witch={'user'} id={id}/>
       </>
   )
 }
