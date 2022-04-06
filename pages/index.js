@@ -20,14 +20,12 @@ const Home = () => {
         {field: 'model'},
         {field: 'price'}
     ])
-useEffect(()=>{
-    testApi().then(res=>setApi(res));
-},[])
+
 
     return (
         <NavBar>
             <div>
-                {api}
+
             </div>
             <div className="ag-theme-alpine" style={{height: 400, width: 600}}>
                 <AgGridReact
