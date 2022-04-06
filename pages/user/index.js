@@ -5,7 +5,9 @@ import AgGrid from '../../src/containers/AgGrid'
 function User() {
   return (
       <>
-        <AgGrid witch={'user'}/>
+        {/*<AgGrid witch={'user'}/>*/}
+        <h1>데이터 불러오는</h1>
+        <AgGrid witch={'userList'}/>
       </>
   )
 }

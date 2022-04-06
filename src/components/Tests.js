@@ -6,10 +6,9 @@ import UserView from '../containers/UserView'
 function Tests({id}) {
 
   return (
-      <>
+      <div>
         <UserView id={id}/>
-        <AgGrid witch={'user'} id={id}/>
-      </>
+      </div>
   )
 }
 

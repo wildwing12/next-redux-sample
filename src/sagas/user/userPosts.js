@@ -1,7 +1,5 @@
-import {userPostsApi, userViewPostsApi} from '../../api'
+import {userListApi, userPostsApi, userViewPostsApi} from '../../api'
 import {call, put, takeEvery} from 'redux-saga/effects'
-import Axios from 'axios'
-import {EXPORT_MARKER} from 'next/constants'
 
 // 회원 리스트 불러오는
 const GET_USER_POSTS = 'userPosts/GET_USER_POSTS';
@@ -23,6 +21,11 @@ const USER_DELETE = 'userPost/USER_DELETE';
 const USER_DELETE_SUCCESS = 'userPost/USER_DELETE_SUCCESS';
 const USER_DELETE_ERROR = 'userPost/USER_DELETE_ERROR';
 
+// 회원 리스트 조회_DB
+const USER_LIST = 'userPost/USER_LIST';
+const USER_LIST_SUCCESS = 'userPost/USER_LIST_SUCCESS';
+const USER_LIST_ERROR = 'userPost/USER_LIST_ERROR';
+
 
 // 회원 리스트 불러오는
 export const getUserPostsSaga = () => ({type: GET_USER_POSTS});
@@ -40,6 +43,11 @@ export const getUserViewSage = (id) => {
 // 회원 삭제
 export const getUserDeleteSaga = (id) => {
   return ({type: USER_DELETE, id})
+}
+
+// 회원 리스트 조회_DB
+export const getUserListSaga = () => {
+  return ({type: USER_LIST})
 }
 
 
@@ -105,6 +113,21 @@ function* loadUserDeleteSaga({id}) {
   }
 }
 
+// 회원 리스트 조회_DB
+function* loadUserListSaga() {
+  try {
+    const userList = yield call(userListApi);
+
+    yield put({
+      type: USER_LIST_SUCCESS, userList
+    })
+  } catch (error) {
+    yield put({
+      type: USER_LIST_ERROR, error
+    })
+  }
+}
+
 export function* userPostSaga() {
   // 회원 리스트 불러오는
   yield takeEvery(GET_USER_POSTS, loadUserPostsSaga);
@@ -114,6 +137,8 @@ export function* userPostSaga() {
   yield takeEvery(USER_VIEW, loadUserViewSage);
   // 회원 삭제
   yield takeEvery(USER_DELETE, loadUserDeleteSaga);
+  // 회원 리스트 조회_DB
+  yield takeEvery(USER_LIST, loadUserListSaga);
 }
 
 // state 초기값
@@ -147,10 +172,18 @@ export default function posts(state = initialState, action) {
     case USER_DELETE_SUCCESS:
       return common(state, false, null, null)
 
+      // 회원 리스트 조회_DB
+    case USER_LIST:
+      return common(state, true, null, null)
+    case USER_LIST_SUCCESS:
+      debugger;
+      return common(state, false, action.userList.data, null)
+
     case GET_USER_POSTS_ERROR :
     case USER_JOIN_ERROR :
     case USER_VIEW_ERROR :
     case USER_DELETE_ERROR :
+    case USER_LIST_ERROR:
       return common(state, false, null, action.error)
 
     default:

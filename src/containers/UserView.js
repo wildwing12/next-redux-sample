@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {getUserDeleteSaga, getUserViewSage} from '../sagas/user/userPosts'
 import {useRouter} from 'next/router'
+import UserUpdate from './UserUpdate'
 
 function UserView({id}) {
 
@@ -32,6 +33,9 @@ function UserView({id}) {
             userDeleteBtn(id)
           }}>삭제!
           </button>
+
+          <UserUpdate data={data}/>
+
           <button onClick={() => router.back()}>뒤로가기</button>
         </div>
       </>
