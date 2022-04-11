@@ -2,11 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faSwimmingPool,faDashboard } from '@fortawesome/free-solid-svg-icons'
-import twitter from '../../../assets/twitter-brands.svg'
 
 function NavBar({children}) {
     return (
-        <div>
+        <div className="wrapper">
             <div className="nav-bar">
                 <div className="nav-bar__brand">
                     <FontAwesomeIcon icon={faCoffee} /> 카페:밤
@@ -26,7 +25,7 @@ function NavBar({children}) {
                         <Link href="#"><a>오시는길</a></Link>
                     </li>
                     <li>
-                        <Link href=""><a>사이트맵</a></Link>
+                        <Link href="#"><a>사이트맵</a></Link>
                     </li>
                 </ul>
 
@@ -36,9 +35,17 @@ function NavBar({children}) {
                 </ul>
             </div>
             <div>
-                {children}
+               {children}
             </div>
             <style jsx>{`
+                .wrapper{
+                  height: 80px;
+                  width: 100%;
+                  position: fixed;
+                  top:0;  
+                  z-index: 1000;
+                } 
+                
                 .nav-bar {
                     display: flex;
                     justify-content: space-between;
@@ -66,6 +73,11 @@ function NavBar({children}) {
                 .nav-bar__menu li{
                   width: 15%;
                 }
+                 
+                 a {
+                  text-decoration: none;
+                  color: white;
+                 }
                 .nav-bar__share{
                   display: flex;
                   list-style: none;

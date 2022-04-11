@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import {test} from '.'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import NavBar from "../src/components/NavBar";
-import {testApi} from '../src/api'
+import Mainpage from "../src/components/Mainpage";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Col, Row} from "react-bootstrap";
 
 const Home = () => {
 
-    const [api, setApi]= useState("");
+    const [api, setApi] = useState("");
     const [rowData] = useState([
         {make: "Toyota", model: "Celica", price: 35000},
         {make: "Ford", model: "Mondeo", price: 32000},
@@ -23,17 +25,19 @@ const Home = () => {
 
 
     return (
-        <NavBar>
-            <div>
-
+        <div  >
+            <NavBar/>
+            <div className="top-contents">
+                <Mainpage />
             </div>
-            <div className="ag-theme-alpine" style={{height: 400, width: 600}}>
-                <AgGridReact
-                    rowData={rowData}
-                    columnDefs={columnDefs}>
-                </AgGridReact>
-            </div>
-        </NavBar>
+            <style jsx>{`
+            .top-contents {
+                margin-top: 74px;
+                height: 500vh;
+                z-index: 1;
+            }
+            `}</style>
+        </div>
     );
 };
 export default Home;
