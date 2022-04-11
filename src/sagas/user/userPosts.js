@@ -82,9 +82,7 @@ function* loadUserJoinSaga(props) {
 
 // 회원 조회
 function* loadUserViewSage({id}) {
-  // debugger;
   try {
-    // debugger;
     const paramId = yield call(userViewPostsApi, id);
     yield put({
       type: USER_VIEW_SUCCESS,
@@ -117,7 +115,6 @@ function* loadUserDeleteSaga({id}) {
 function* loadUserListSaga() {
   try {
     const userList = yield call(userListApi);
-
     yield put({
       type: USER_LIST_SUCCESS, userList
     })
@@ -146,7 +143,7 @@ const initialState = {
   loading: false, data: null, error: null,
 }
 
-export default function posts(state = initialState, action) {
+export default function userPosts(state = initialState, action) {
   switch (action.type) {
       // 회원 리스트 불러오는
     case GET_USER_POSTS :
@@ -176,8 +173,7 @@ export default function posts(state = initialState, action) {
     case USER_LIST:
       return common(state, true, null, null)
     case USER_LIST_SUCCESS:
-      debugger;
-      return common(state, false, action.userList.data, null)
+      return common(state, false, action.userList, null)
 
     case GET_USER_POSTS_ERROR :
     case USER_JOIN_ERROR :

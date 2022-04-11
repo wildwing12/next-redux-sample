@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import React, {useEffect, useState} from 'react'
 import {AgGridReact} from 'ag-grid-react'
 import {useRouter} from 'next/router'
-import {getUserListSaga, getUserPostsSaga} from '../sagas/user/userPosts'
+import {getUserListSaga, getUserPostsSaga} from '../../sagas/user/userPosts'
 
 // 회원 리스트 불러오기
 function AgGrid({witch, id}) {

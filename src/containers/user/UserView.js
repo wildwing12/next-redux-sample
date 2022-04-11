@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {getUserDeleteSaga, getUserViewSage} from '../sagas/user/userPosts'
+import {getUserDeleteSaga, getUserViewSage} from '../../sagas/user/userPosts'
 import {useRouter} from 'next/router'
 import UserUpdate from './UserUpdate'
 

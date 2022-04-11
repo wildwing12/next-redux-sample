@@ -23,6 +23,11 @@ export const testApi = async () => {
 
 export const userListApi = async () => {
   const api = await axios.get("http://localhost:8080/api/userList")
-  console.log(api);
-  return api
+  return api.data
+
+}
+
+export const todoInsert = async (infoData) => {
+  const api = await axios.post("http://localhost:8080/api/todoInsert", infoData);
+  return api.data
 }

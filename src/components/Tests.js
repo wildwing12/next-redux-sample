@@ -1,6 +1,6 @@
 import React from 'react';
-import AgGrid from '../containers/AgGrid'
-import UserView from '../containers/UserView'
+import AgGrid from '../containers/user/AgGrid'
+import UserView from '../containers/user/UserView'
 
 
 function Tests({id}) {
