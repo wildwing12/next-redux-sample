@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {getTodoInsertSage} from '../../sagas/todo/todoList'
+import {getTodoInsertSaga} from '../../sagas/todo/todoList'
 
 export default function TodoInsert() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export default function TodoInsert() {
 
 
   function todoInsertBtn() {
-    dispatch(getTodoInsertSage(todo));
+    dispatch(getTodoInsertSaga(todo));
   }
 
   return (

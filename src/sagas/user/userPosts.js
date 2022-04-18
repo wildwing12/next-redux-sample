@@ -31,12 +31,12 @@ const USER_LIST_ERROR = 'userPost/USER_LIST_ERROR';
 export const getUserPostsSaga = () => ({type: GET_USER_POSTS});
 
 // 회원가입
-export const getUserJoinSage = (info) => {
+export const getUserJoinSaga = (info) => {
   return ({type: USER_JOIN, data: info})
 }
 
 // 회원 조회
-export const getUserViewSage = (id) => {
+export const getUserViewSaga = (id) => {
   return ({type: USER_VIEW, id})
 }
 
@@ -81,7 +81,7 @@ function* loadUserJoinSaga(props) {
 }
 
 // 회원 조회
-function* loadUserViewSage({id}) {
+function* loadUserViewSaga({id}) {
   try {
     const paramId = yield call(userViewPostsApi, id);
     yield put({
@@ -131,7 +131,7 @@ export function* userPostSaga() {
   // 회원가입
   yield takeEvery(USER_JOIN, loadUserJoinSaga);
   // 회원 조회
-  yield takeEvery(USER_VIEW, loadUserViewSage);
+  yield takeEvery(USER_VIEW, loadUserViewSaga);
   // 회원 삭제
   yield takeEvery(USER_DELETE, loadUserDeleteSaga);
   // 회원 리스트 조회_DB

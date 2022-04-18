@@ -12,5 +12,4 @@ function UserListCom() {
   )
 }
 
-
 export default UserListCom;

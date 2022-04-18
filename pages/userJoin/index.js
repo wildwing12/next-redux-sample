@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
-import {getUserJoinSage, getUserPostsSaga} from '../../src/sagas/user/userPosts'
+import {getUserJoinSaga, getUserPostsSaga} from '../../src/sagas/user/userPosts'
 import {AgGridReact} from 'ag-grid-react'
 import AgGrid from '../../src/containers/user/AgGrid'
 
@@ -12,7 +12,7 @@ function UserJoin() {
 
   function joinBtn(e) {
     e.preventDefault();
-    dispatch(getUserJoinSage(info));
+    dispatch(getUserJoinSaga(info));
   }
 
   return (
